@@ -10,7 +10,6 @@ import {
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
-
 import Home from './src/views/Home';
 
 function App(): JSX.Element {
@@ -24,7 +23,8 @@ function App(): JSX.Element {
 
 const styles = StyleSheet.create({
   container: {
-    
+    flex: 1,
+    backgroundColor: 'rgba(1,26,93,255)'
   }
 });
 
