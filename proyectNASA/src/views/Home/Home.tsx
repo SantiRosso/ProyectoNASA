@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
+//components:
 import Header from '../../components/Header';
+import TodaysImage from '../../components/TodaysImage';
+//utils
 import fetchApi from '../../utils/fetch';
 
 const Home = () => {
@@ -25,6 +28,7 @@ const Home = () => {
     return(
         <View style={styles.container}>
             <Header/>
+            <TodaysImage/>
         </View>
     )
 }
