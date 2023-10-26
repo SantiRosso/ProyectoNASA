@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
+import { format, sub } from 'date-fns';
 //components:
 import Header from '../../components/Header';
 import TodaysImage from '../../components/TodaysImage';
@@ -9,7 +10,8 @@ import { PostImage } from '../../types';
 
 const Home = () => {
 
-    const [todaysImage, setTodaysImage] = useState<PostImage>();
+    const [todaysImage, setTodaysImage] = useState<PostImage>({});
+    const [lastFiveDayImages, setLastFiveDaysImages] = useState<PostImage[]>([])
 
     useEffect(() => {
         const loadTodaysImage = async () => {
@@ -22,7 +24,21 @@ const Home = () => {
             }
         }
 
+        const loadLast5DaysImages = async () => {
+            try {
+                const date = new Date();
+                const todaysDate = format(date, 'yyyy-MM-dd');
+                const fiveDaysAgoDate = format(sub(date, {days: 5}), 'yyyy-MM-dd')
+
+                const lastFiveDaysImagesResponse = await fetchApi(`&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`);
+                setLastFiveDaysImages(lastFiveDaysImagesResponse)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
         loadTodaysImage().catch(null)
+        loadLast5DaysImages().catch(null)
     }, [])
 
     return(
