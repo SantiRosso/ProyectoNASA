@@ -5,10 +5,11 @@ import Header from '../../components/Header';
 import TodaysImage from '../../components/TodaysImage';
 //utils
 import fetchApi from '../../utils/fetch';
+import { PostImage } from '../../types';
 
 const Home = () => {
 
-    const [todaysImage, setTodaysImage] = useState();
+    const [todaysImage, setTodaysImage] = useState<PostImage>();
 
     useEffect(() => {
         const loadTodaysImage = async () => {
@@ -17,18 +18,17 @@ const Home = () => {
                 setTodaysImage(todaysImageResponse);
             } catch (error) {
                 console.error(error);
+                setTodaysImage({})
             }
         }
 
         loadTodaysImage().catch(null)
     }, [])
 
-    console.log(todaysImage)
-
     return(
         <View style={styles.container}>
             <Header/>
-            <TodaysImage/>
+            <TodaysImage {...todaysImage}/>
         </View>
     )
 }
