@@ -1,11 +1,18 @@
 import React, {FC} from "react"
-import { Text, View, StyleSheet } from "react-native"
-import { PostImage } from "../../types";
+import { Text, View, StyleSheet, ScrollView } from "react-native"
+import { PostImage as PostImageTypes } from "../../types";
+import PostImage from "./PostImage";
 
-const LastFiveDayImages: FC<PostImage[]> = (props) => {
+
+const LastFiveDayImages: FC<{ postImages?: PostImageTypes[] }> = ({ postImages }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Last 5 Days</Text>
+            <ScrollView style={styles.content}>
+                {postImages?.map(postImage => (
+                    <PostImage key={`post-image-${postImage.title}`} {...postImage}/>
+                ))}
+            </ScrollView>
         </View>
     )
 }
@@ -19,6 +26,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
         marginBottom: 18
+    },
+    content: {
+        paddingHorizontal: 24
     }
 })
 
