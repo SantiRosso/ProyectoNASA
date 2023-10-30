@@ -46,7 +46,7 @@ const Home = () => {
         <View style={styles.container}>
             <Header/>
             <TodaysImage {...todaysImage}/>
-            <LastFiveDayImages {...lastFiveDayImages}/>
+            <LastFiveDayImages postImages={lastFiveDayImages}/>
         </View>
     )
 }
